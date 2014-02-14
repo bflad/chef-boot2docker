@@ -1,0 +1,10 @@
+[Unit]
+Description=boot2docker sockets for <%= @name %>
+
+[Socket]
+<% [@docker_port, @ssh_port].each do |s| -%>
+ListenStream=<%= s %>
+<% end -%>
+
+[Install]
+WantedBy=sockets.target

@@ -1,0 +1,17 @@
+[Unit]
+Description=boot2docker service for <%= @name %>
+Author=boot2docker Chef Cookbook
+After=vbox.service
+
+[Service]
+Restart=always
+Environment=HTTP_PROXY=<%= @http_proxy %>
+Environment=DOCKER_PORT=<%= @docker_port %>
+Environment=SSH_PORT=<%= @ssh_port %>
+Environment=VM_NAME=<%= @name %>
+ExecStartPre=-<%= node['boot2docker']['install_dir'] %>/boot2docker init
+ExecStart=<%= node['boot2docker']['install_dir'] %>/boot2docker wait
+ExecStop=<%= node['boot2docker']['install_dir'] %>/boot2docker stop
+
+[Install]
+WantedBy=local.target
