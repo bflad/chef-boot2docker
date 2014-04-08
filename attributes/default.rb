@@ -7,34 +7,34 @@ default['boot2docker']['docker_port'] = 4243
 default['boot2docker']['http_proxy'] = nil
 
 default['boot2docker']['init_type'] = value_for_platform(
-  %w{ centos oracle redhat scientific } => {
-    %w{ 5 6 } => 'sysv',
+  %w(centos oracle redhat scientific) => {
+    %w(5 6) => 'sysv',
     'default' => 'systemd'
   },
-  %w{ debian } => {
+  %w(debian) => {
     'default' => 'sysv'
   },
-  %w{ fedora } => {
+  %w(fedora) => {
     'default' => 'systemd'
   },
-  %w{ mac_os_x mac_os_x_server } => {
+  %w(mac_os_x mac_os_x_server) => {
     'default' => nil
   },
-  %w{ ubuntu } => {
+  %w(ubuntu) => {
     'default' => 'upstart'
   },
   'default' => 'upstart'
 )
 
 default['boot2docker']['install_type'] = value_for_platform(
-  %w{ mac_os_x mac_os_x_server } => {
+  %w(mac_os_x mac_os_x_server) => {
     'default' => 'package'
   },
   'default' => 'binary'
 )
 
 default['boot2docker']['install_dir'] =
-  if %w{ mac_os_x mac_os_x_server}.include?(node['platform']) && node['boot2docker']['install_type'] == 'package'
+  if %w(mac_os_x mac_os_x_server).include?(node['platform']) && node['boot2docker']['install_type'] == 'package'
     '/usr/local/bin'
   else
     '/usr/bin'
